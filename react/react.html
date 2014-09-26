@@ -56,7 +56,7 @@
             data.tags = data.tags.filter(function(tag) {
                 return tag.text!== tagToRemove;
             });
-            this.getCommentFor(tag);
+            this.getCommentFor(tagToRemove);
             this.setState({data: data});
         },
         render: function() {
@@ -171,7 +171,7 @@
         });
 
       var data = {
-        tags: [{text:'starter'}],
+        tags: [],
         common: ['Cats', 'Gifs', 'Puppies', 'Funny', 'Canada']
       };
         React.renderComponent(

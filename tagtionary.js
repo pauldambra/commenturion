@@ -54,7 +54,7 @@
             searchCommentsForTag(currentTag);
         }
         var largestCount = Math.max.apply(Math, matchCounts);
-        if (largestCount <= 0) {
+        if (largestCount == 0) {
             var match = randomComment();
         } else {
             var largestCountIndex = matchCounts.indexOf(largestCount);

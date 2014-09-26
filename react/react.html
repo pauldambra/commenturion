@@ -56,7 +56,7 @@
             data.tags = data.tags.filter(function(tag) {
                 return tag.text!== tagToRemove;
             });
-            this.getCommentFor(tagToRemove);
+            this.getCommentFor(data.tags);
             this.setState({data: data});
         },
         render: function() {

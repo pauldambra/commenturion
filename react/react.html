@@ -52,7 +52,8 @@
                 data.lastTag = data.lastTag.replace('{{lastTag}}', tag);
             }
         },
-        handleCommonButtonClick: function(tag) {
+        addNewTag: function(tag) {
+            console.log(tag);
             data.tags.push({text:tag});
             this.getCommentFor(tag);
             this.setState({data: data});
@@ -69,7 +70,9 @@
                 <div>
                   <div className="row">
                     <div className="col-sm-12" id="tag-box">
-                        <TagBox data={this.props.data.tags} onRemoveTagClick={this.handleRemoveTag}/>
+                        <TagBox data={this.props.data.tags} 
+                                onRemoveTagClick={this.handleRemoveTag}
+                                onAddTag={this.addNewTag}/>
                     </div>
                 </div>
                 <div className="row">
@@ -78,7 +81,7 @@
                         <div id="button-row">
                             <ButtonRow 
                                 data={this.props.data.common} 
-                                onCommonButtonClick={this.handleCommonButtonClick}/>
+                                onCommonButtonClick={this.addNewTag}/>
                         </div>
                     </div>
                 </div>
@@ -100,7 +103,7 @@
             return (
                 <div className="tags">
                     <TagList data={this.props.data} onRemoveTagClick={this.props.onRemoveTagClick}/>
-                    <TagInput/>
+                    <TagInput onAddTag={this.props.onAddTag}/>
                 </div>
             );
           }
@@ -131,8 +134,17 @@
 
         var TagInput = React.createClass({
           render: function() {
+            var handler = this.props.onAddTag;
+            handleAddTag = function(e) {
+                var enter = 13;var space=32;
+                if(e.which===enter||e.which===space) {
+                    handler(e.target.value);
+                    e.target.value('');
+                }
+
+            };
             return (
-              <input className="input" type="text" placeholder="Add a tag"/>
+              <input className="input" type="text" placeholder="Add a tag" onKeyPress={handleAddTag}/>
             );
           }
         });

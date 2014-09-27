@@ -42,6 +42,8 @@
 
       var Commenturion = React.createClass({
         getCommentFor: function(tag) {
+            if(data.tags.length==0) return;
+            
             data.lastTag = window.tagtionary.getCommentFor(data.tags);
             if (data.lastTag.indexOf('{{lastTag}}')>=0) {
                 data.lastTag = data.lastTag.replace('{{lastTag}}', tag);
